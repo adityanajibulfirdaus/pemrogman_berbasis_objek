@@ -1,53 +1,56 @@
 <?php
 
-class Produk {
+class produk {
     
-    // Property
+    //property
     public string $kode;
     public string $nama;
     public int $harga;
     public int $stok;
 
-    // Constant
+    //constant
     public const PAJAK = 0.11;
-
-    // Method constructor untuk inisialisasi awal (opsional tapi disarankan)
-    public function __construct(string $kode, string $nama, int $harga, int $stok) {
-        $this->kode = $kode;
-        $this->nama = $nama;
-        $this->harga = $harga;
-        $this->stok = $stok;
+    
+    // 1. Tambahkan nama function (misalnya: getPersentasePajak)
+    public function getPersentasePajak()
+    {
+        // 2. Tambahkan operator * (kali)
+        return self::PAJAK * 100;
     }
 
-    // Method untuk menghitung nilai pajak dari harga
-    public function hitungJumlahPajak(): float {
-        return $this->harga * self::PAJAK;
-    }
-
-    // Method untuk menghitung total harga (harga asli + pajak)
-    public function hitungTotalHarga(): float {
-        return $this->harga + $this->hitungJumlahPajak();
-    }
-
-    // Method untuk menampilkan semua informasi produk
-    public function cetakInfo(): void {
-        $persentasePajak = self::PAJAK * 100;
-        
-        echo "Produk: " . $this->nama . "<br>";
-        echo "Kode: " . $this->kode . "<br>";
-        // Menggunakan number_format agar harga lebih rapi (opsional)
-        echo "Harga: Rp." . number_format($this->harga, 0, ',', '.') . "<br>";
-        echo "Stok: " . $this->stok . "<br>";
-        echo "Pajak: " . $persentasePajak . "%" . "<br>";
-        echo "Total harga setelah pajak: Rp." . number_format($this->hitungTotalHarga(), 0, ',', '.') . "<br>";
+    public function total() {
+        // 3. Perbaiki typo 'return', tambah operator *, dan ubah pajak jadi huruf besar
+        return $this->harga + ($this->harga * self::PAJAK);
     }
 }
 
-// Object
-// Menginput ke property sekarang lebih ringkas menggunakan constructor
-$produk = new Produk('P001', 'Laptop', 10000000, 5);
+//object
+$produk = new produk();
 
-// Menampilkan hasil cukup dengan memanggil satu method
-$produk->cetakInfo();
+//INPUTAN KE PROPERTY
+$produk->kode = 'P001';
+$produk->nama = 'Laptop';
+$produk->harga = 10000000;
+$produk->stok = 5;
 
+//HITUNG PAJAK
+// 4. Tambahkan operator * (kali) pada perhitungan
+$pajak = produk::PAJAK * 100;
+
+// 5. Tambahkan operator * (kali) pada perhitungan
+$jumlahpajak = $produk->harga * produk::PAJAK;
+
+//total
+$total = $produk->harga + $jumlahpajak;
+// Catatan: Karena kamu sudah buat fungsi total() di dalam class, 
+// kamu juga bisa langsung pakai: $total = $produk->total();
+
+//hasil
+echo "produk: " . $produk->nama . "<br>";
+echo "kode: " . $produk->kode . "<br>";
+echo "harga: " . $produk->harga . "<br>";
+echo "stok: " . $produk->stok . "<br>";
+echo "pajak: " . $pajak . "%" . "<br>";
+
+echo "total harga setelah pajak: Rp." . $total;
 ?>
